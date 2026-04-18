@@ -45,12 +45,21 @@ void Game::init() {
 	}
 }
 void Game::update() {
+
 	if (game_won || game_over) {
 		if (IsKeyPressed(KEY_R)) {
 			restart_game();
 			return;
 		}
 		return; //Corte ante la condición de victoria o derrota.
+	}
+	
+	float delta_time = GetFrameTime();
+	timer.advance(delta_time);
+
+	//Condición de derrota si llega el tiempo a cero.
+	if (timer.get_time_over()) {
+		game_over = true;
 	}
 
 	player.update(assets);
@@ -64,27 +73,41 @@ void Game::update() {
 	}
 
 	check_collisions();
+
 }
 void Game::draw() {
 
 	DrawTexture(assets.background, 0, -70, WHITE);
 
-	for (auto& platform : platforms) {
-		platform.draw(assets);
+	if(!game_won && !game_over) { //Solo dibujo el juego si todavía se está jugando
+		timer.draw(utilities);
+
+		for (auto& platform : platforms) {
+			platform.draw(assets);
+		}
+
+		door.draw(assets);
+
+		for (auto& stack : stacks) {
+			stack.draw(assets);
+		}
+
+		for (auto& queue : queues) {
+			queue.draw(assets);
+		}
+
+		player.draw(assets);
+	}
+	
+	if (game_won) {
+		utilities.draw_centerd_text("Has ganado!", GetScreenWidth(), 250, 50, GREEN);
+		utilities.draw_centerd_text("Presiona 'R' para volver a jugar", GetScreenWidth(), 305, 25, GRAY);
 	}
 
-	door.draw(assets);
-
-	for (auto& stack : stacks) {
-		stack.draw(assets);
+	if (game_over) {
+		utilities.draw_centerd_text("Has perdido!", GetScreenWidth(), 250, 50, RED);
+		utilities.draw_centerd_text("Presiona 'R' para volver a jugar", GetScreenWidth(), 305, 20, GRAY);
 	}
-
-	for (auto& queue : queues) {
-		queue.draw(assets);
-	}
-
-	player.draw(assets);
-
 }
 void Game::check_collisions() {
 	check_platform_collisions();
@@ -160,7 +183,8 @@ void Game::check_enemies_collisions() {
 }
 void Game::check_door_collision() {
 	if (CheckCollisionRecs(player.get_hitbox(), door.get_hitbox())) {
-		win_game();
+		game_won = true;
+
 	}
 }
 void Game::win_game() {
@@ -172,7 +196,7 @@ void Game::lose_game() {
 void Game::restart_game() {
 	game_over = false;
 	game_won = false;
-
+	timer.restart();
 	player.restart();
 
 }

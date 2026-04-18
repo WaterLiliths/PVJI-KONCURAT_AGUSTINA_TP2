@@ -139,6 +139,8 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Queue.cpp" />
     <ClCompile Include="Stack.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Assets.h" />
@@ -149,6 +151,8 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Stack.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
