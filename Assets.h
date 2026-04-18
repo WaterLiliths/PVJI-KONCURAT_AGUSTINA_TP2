@@ -30,8 +30,8 @@ struct Assets
 	//SONIDO
 	//======
 	Sound jump_sfx;
-	Sound correct_sfx;
-	Sound wrong_sfx;
+	Sound win_sfx;
+	Sound fall_sfx;
 
 	//===================
 

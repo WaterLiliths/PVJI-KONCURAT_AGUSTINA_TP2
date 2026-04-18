@@ -59,6 +59,7 @@ void Game::update() {
 
 	//Condición de derrota si llega el tiempo a cero.
 	if (timer.get_time_over()) {
+		PlaySound(assets.fall_sfx);
 		game_over = true;
 	}
 
@@ -170,25 +171,28 @@ void Game::check_platform_collisions() {
 void Game::check_enemies_collisions() {
 	for (auto& queue : queues) {
 		if (queue.check_collisions(player)) {
-			TraceLog(LOG_INFO, "COLISIÓN");
+			//TraceLog(LOG_INFO, "COLISIÓN");
+			PlaySound(assets.fall_sfx);
 			player.restart();
 		}
 	}
 
 	for (auto& stack : stacks) {
 		if (stack.check_collisions(player)) {
+			PlaySound(assets.fall_sfx);
 			player.restart();
 		}
 	}
 }
 void Game::check_door_collision() {
 	if (CheckCollisionRecs(player.get_hitbox(), door.get_hitbox())) {
+		PlaySound(assets.win_sfx);
 		game_won = true;
 
 	}
 }
 void Game::win_game() {
-	TraceLog(LOG_INFO, "Has ganado");
+
 }
 void Game::lose_game() {
 
