@@ -7,21 +7,34 @@ Player::Player() {
 	hitbox = { position.x, position.y, size.x, size.y }; //Inicializo los valores de acuerdo al tamaño que tendrá el sprite
 	previous_position = position;
 	is_on_floor = false;
+	anim_frame = 0;
+	anim_timer = 0.0f;
+	is_moving = false;
 }
 Player::~Player() {
 
 }
 void Player::draw(const Assets& assets) {
-	DrawTextureEx(assets.player_01, position, 0, 2, WHITE);
+
+		Texture2D current;
+
+		if (anim_frame == 0)
+			current = assets.player_0;
+		else
+			current = assets.player_1;
+
+		DrawTextureEx(current, position, 0, 2, WHITE);
+	
+	//DrawTextureEx(assets.player_0, position, 0, 2, WHITE);
 
 	////DEBUG
-	DrawRectangleLines(
-		(int)hitbox.x,
-		(int)hitbox.y,
-		(int)hitbox.width,
-		(int)hitbox.height,
-		GREEN
-	);
+	//DrawRectangleLines(
+	//	(int)hitbox.x,
+	//	(int)hitbox.y,
+	//	(int)hitbox.width,
+	//	(int)hitbox.height,
+	//	GREEN
+	//);
 }
 //Unifico el movimiento y el salto en una única función update.
 void Player::update(const Assets& assets) {
@@ -33,9 +46,24 @@ void Player::update(const Assets& assets) {
 	move();
 }
 void Player::move() {
-	float delta_time = GetFrameTime();
+	
 
+	float delta_time = GetFrameTime();
 	previous_position = position;
+
+	if (is_moving) {
+		anim_timer += delta_time;
+
+		if (anim_timer >= 0.2f) {
+			anim_timer = 0.0f;
+			anim_frame = (anim_frame + 1) % 2; //Alterna entre 0 y 1 
+		}
+	}
+	else {
+		anim_frame = 0; //idle
+	}
+
+	is_moving = false;
 
 	//Simulación de gravedad si el personaje no está en el suelo
 	if (!is_on_floor) {
@@ -49,12 +77,15 @@ void Player::move() {
 	{
 		position.x += velocity.x * delta_time;
 		hitbox.x = position.x;
+		is_moving = true;
 	}
 	if (IsKeyDown(KEY_LEFT) && position.x > 0)
 	{
 		position.x -= velocity.x * delta_time;
 		hitbox.x = position.x;
+		is_moving = true;
 	}
+
 }
 void Player::jump(const Assets& assets) {
 	float jump_buffer = 0.0; //Creo un buffer porque no siempre lee la barra para saltar.

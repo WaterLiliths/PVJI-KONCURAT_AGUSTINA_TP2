@@ -81,13 +81,13 @@ void Platform::draw(Assets& assets) {
 
 
 	//DEBUG 
-	DrawRectangleLines(
-		(int)hitbox.x,
-		(int)hitbox.y,
-		(int)hitbox.width,
-		(int)hitbox.height,
-		RED
-	);
+	//DrawRectangleLines(
+	//	(int)hitbox.x,
+	//	(int)hitbox.y,
+	//	(int)hitbox.width,
+	//	(int)hitbox.height,
+	//	RED
+	//);
 
 }
 void Platform::assign_platform_hitbox() {

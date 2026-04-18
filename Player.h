@@ -14,6 +14,9 @@ protected:
 	Vector2 velocity;
 	Rectangle hitbox;
 	Vector2 previous_position; //Para guardar el valor de la posición y colisionar con las plataformas que se traspasan desde abajo.
+	int anim_frame; //para las animaciones
+	float anim_timer; //para el tiempo de las animaciones
+	bool is_moving;
 
 	bool is_on_floor;
 

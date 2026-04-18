@@ -5,8 +5,8 @@ void Assets::load() {
 	//========
 
 	//PLAYER
-	player_01 = LoadTexture("assets/tile_0000.png");
-	player_02 = LoadTexture("assets/tile_0001.png");
+	player_0 = LoadTexture("assets/tile_0000.png");
+	player_1 = LoadTexture("assets/tile_0001.png");
 
 	//ENEMIES
 	for (int i = 0; i < 8; i++) {
@@ -40,8 +40,8 @@ void Assets::unload() {
 	//========
 
 	//PLAYER
-	UnloadTexture(player_01);
-	UnloadTexture(player_02);
+	UnloadTexture(player_0);
+	UnloadTexture(player_1);
 
 	//ENEMIES
 	for (int i = 0; i < 8; i++) {

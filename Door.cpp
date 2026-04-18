@@ -13,13 +13,13 @@ void Door::draw(const Assets& assets) {
 	DrawTextureEx(assets.door_1, {position.x, position.y - size.y}, 0, 2, WHITE); //Marco superior de la puerta
 
 	//DEBUG 
-	DrawRectangleLines(
-		(int)hitbox.x,
-		(int)hitbox.y,
-		(int)hitbox.width,
-		(int)hitbox.height,
-		RED
-	);
+	//DrawRectangleLines(
+	//	(int)hitbox.x,
+	//	(int)hitbox.y,
+	//	(int)hitbox.width,
+	//	(int)hitbox.height,
+	//	RED
+	//);
 
 }
 Rectangle Door::get_hitbox() {
