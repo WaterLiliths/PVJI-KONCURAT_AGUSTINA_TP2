@@ -10,8 +10,8 @@ struct Assets
 	//========
 
 	//PLAYER
-	Texture2D player_01;
-	Texture2D player_02;
+	Texture2D player_0;
+	Texture2D player_1;
 	
 	//ENEMIES
 	Texture2D enemy[8];
@@ -30,8 +30,8 @@ struct Assets
 	//SONIDO
 	//======
 	Sound jump_sfx;
-	Sound correct_sfx;
-	Sound wrong_sfx;
+	Sound win_sfx;
+	Sound fall_sfx;
 
 	//===================
 

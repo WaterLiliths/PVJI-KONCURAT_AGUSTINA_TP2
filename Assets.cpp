@@ -5,8 +5,8 @@ void Assets::load() {
 	//========
 
 	//PLAYER
-	player_01 = LoadTexture("assets/tile_0000.png");
-	player_02 = LoadTexture("assets/tile_0001.png");
+	player_0 = LoadTexture("assets/tile_0000.png");
+	player_1 = LoadTexture("assets/tile_0001.png");
 
 	//ENEMIES
 	for (int i = 0; i < 8; i++) {
@@ -25,9 +25,13 @@ void Assets::load() {
 	//BACKGROUND
 	background = LoadTexture("assets/background.png");
 
-//	jump_sfx = LoadSound("assets/jump.mp3");
-//	correct_sfx = LoadSound("assets/correct.wav");
-//	wrong_sfx = LoadSound("assets/wrong.mp3");
+	//======
+	//SONIDO
+	//======
+
+	jump_sfx = LoadSound("assets/jump.mp3");
+	win_sfx = LoadSound("assets/win.wav");
+	fall_sfx = LoadSound("assets/fall.mp3");
 }
 void Assets::unload() {
 
@@ -36,8 +40,8 @@ void Assets::unload() {
 	//========
 
 	//PLAYER
-	UnloadTexture(player_01);
-	UnloadTexture(player_02);
+	UnloadTexture(player_0);
+	UnloadTexture(player_1);
 
 	//ENEMIES
 	for (int i = 0; i < 8; i++) {
@@ -45,14 +49,19 @@ void Assets::unload() {
 	}
 
 	//TILES
-	for (int i = 0; i < 14; i++) {
+	for (int i = 0; i < 12; i++) {
 		UnloadTexture(tile[i]);
 	}
 
 	//BACKGROUND
 	UnloadTexture(background);
 
-//	UnloadSound(jump_sfx);
-//	UnloadSound(correct_sfx);
-//	UnloadSound(wrong_sfx);
+	//======
+	//SONIDO
+	//======
+
+	UnloadSound(jump_sfx);
+	UnloadSound(win_sfx);
+	UnloadSound(fall_sfx);
+
 }

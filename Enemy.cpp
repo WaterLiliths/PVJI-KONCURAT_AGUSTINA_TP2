@@ -7,6 +7,8 @@ Enemy::Enemy() {
 	speed = 150.0;
 	direction = 1; //Hacia la derecha
 	is_moving = false;
+	anim_frame = 0;
+	anim_timer = 0.0f;
 }
 Enemy::~Enemy() {
 
@@ -22,13 +24,19 @@ void Enemy::update() {
 
 }
 void Enemy::draw(const Assets& assets) {
-	
-	int sprite_index = type * 2; //multiplico el tipo * 2. Por el arreglo de sprites va a asignar el correcto.
+	int sprite_index = type * 2 + anim_frame; //multiplico el tipo * 2. Por el arreglo de sprites va a asignar el correcto.
+
+	anim_timer += GetFrameTime();
+
+	if (anim_timer >= 0.2f) {
+		anim_timer = 0.0f;
+		anim_frame = (anim_frame + 1) % 2; //Alterna entre 0 y 1.
+	}
 
 	DrawTextureEx(assets.enemy[sprite_index], position, 0, 2, WHITE);
 
 	//DEBUG
-	DrawRectangleLines(position.x, position.y, size.x, size.y, RED);
+	//DrawRectangleLines(position.x, position.y, size.x, size.y, RED);
 
 }
 void Enemy::start() {

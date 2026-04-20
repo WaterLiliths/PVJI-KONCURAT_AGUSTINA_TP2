@@ -7,6 +7,8 @@
 #include "Door.h"
 #include "Stack.h"
 #include "Queue.h"
+#include "Timer.h"
+#include "Utilities.h"
 #include <vector>
 
 class Game
@@ -18,6 +20,8 @@ protected:
 	Player player;
 	Assets assets;
 	Door door;
+	Timer timer;
+	Utilities utilities;
 
 	//Creo vectores para inicializar las plataformas, las pilas y las colas
 	std::vector <Platform> platforms;

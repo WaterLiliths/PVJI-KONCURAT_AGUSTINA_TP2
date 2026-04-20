@@ -5,7 +5,8 @@
 int main() {
     Game game;
     
-    InitWindow(828, 684, "Maria Agustina Koncurat");
+    InitWindow(828, 684, "Alien Jump");
+    InitAudioDevice();
     game.init();
 
     while(!WindowShouldClose()) {
@@ -17,6 +18,8 @@ int main() {
 
         EndDrawing();
     }
-    
+    game.unload();
+    CloseAudioDevice();
+    CloseWindow();
     return 0;
 }

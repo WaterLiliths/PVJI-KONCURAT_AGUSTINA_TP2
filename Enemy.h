@@ -19,6 +19,8 @@ protected:
 	float speed;
 	int direction;
 	bool is_moving;
+	int anim_frame; //para las animaciones
+	float anim_timer; //para el tiempo de las animaciones
 
 public:
 	Enemy();
